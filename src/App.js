@@ -1,10 +1,19 @@
-import Landing from "./folder/Landing"
+import { Landing, Error, Register, Dashboard } from "./pages"
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import { ToastContainer } from "react-toastify"
+import "react-toastify/dist/ReactToastify.css"
 
 function App() {
   return (
-    <div>
-      <Landing />
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="landing" element={<Landing />} />
+        <Route path="/" element={<Dashboard />} />
+        <Route path="register" element={<Register />} />
+        <Route path="*" element={<Error />} />
+      </Routes>
+      <ToastContainer position='top-center'/>
+    </BrowserRouter>
   )
 }
 

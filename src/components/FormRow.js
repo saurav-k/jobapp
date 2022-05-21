@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 function FormRow({type, name, value, handleChange, labelText}) {
     return (

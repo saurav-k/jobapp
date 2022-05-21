@@ -1,11 +1,11 @@
 import React from 'react';
 
-function Dashboard(props) {
+function Stats(props) {
     return (
         <div>
-            Dashboard
+            Stats
         </div>
     );
 }
 
-export default Dashboard;
+export default Stats;

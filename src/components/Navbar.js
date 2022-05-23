@@ -34,7 +34,6 @@ function Navbar(props) {
           <button
             onClick={() => {
               setShowLogout(!showLogout)
-              console.log("Show Logout buttoon")
             }}
             type="button"
             className="btn"
@@ -46,7 +45,7 @@ function Navbar(props) {
           <div className={showLogout ? "dropdown show-dropdown" : "dropdown"}>
             <button
               onClick={() => {
-                dispatch(logoutUser())
+                dispatch(logoutUser('Logging out...'))
               }}
               className="dropdown-btn"
             >

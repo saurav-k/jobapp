@@ -1,60 +1,60 @@
-import { useState, useEffect } from "react"
-import { toast } from "react-toastify"
-import { useNavigate } from "react-router-dom"
+import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-import { Logo, FormRow } from "../components"
-import Wrapper from "../assets/wrappers/RegisterPage"
-import { useSelector, useDispatch } from "react-redux"
-import { loginUser, registerUser } from "../features/user/userSlice"
+import { Logo, FormRow } from "../components";
+import Wrapper from "../assets/wrappers/RegisterPage";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser, registerUser } from "../features/user/userSlice";
 
 const initialState = {
   name: "",
   email: "",
   password: "",
   isMember: true,
-}
+};
 
 function Register(props) {
-  const dispatch = useDispatch()
-  const { isLoading, user } = useSelector((store) => store.user)
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const { isLoading, user } = useSelector((store) => store.user);
+  const navigate = useNavigate();
 
-  const [values, setValues] = useState(initialState)
+  const [values, setValues] = useState(initialState);
 
   const toggleMember = () => {
-    setValues({ ...values, isMember: !values.isMember })
-  }
+    setValues({ ...values, isMember: !values.isMember });
+  };
 
   const handleChange = (event) => {
-    const name = event.target.name
-    const value = event.target.value
+    const name = event.target.name;
+    const value = event.target.value;
     // console.log(`${name}:${value}`);
-    setValues({ ...values, [name]: value })
+    setValues({ ...values, [name]: value });
 
     // console.log(event.target);
-  }
+  };
 
   const onSubmit = (e) => {
-    e.preventDefault()
-    const { name, email, password, isMember } = values
+    e.preventDefault();
+    const { name, email, password, isMember } = values;
     if (!email || !password || (!isMember && !name)) {
-      toast.error("Please Fill Out All Fields")
-      return
+      toast.error("Please Fill Out All Fields");
+      return;
     }
     if (isMember) {
-      dispatch(loginUser({ email: email, password: password }))
-      return
+      dispatch(loginUser({ email: email, password: password }));
+      return;
     }
-    dispatch(registerUser({ name, email, password }))
-  }
+    dispatch(registerUser({ name, email, password }));
+  };
 
   useEffect(() => {
     if (user) {
       setTimeout(() => {
-        navigate("/")
-      }, 3000)
+        navigate("/");
+      }, 3000);
     }
-  }, [user, navigate])
+  }, [user, navigate]);
 
   return (
     <Wrapper>
@@ -94,9 +94,21 @@ function Register(props) {
             {values.isMember ? "Register" : "Login"}
           </button>
         </p>
+        <button
+          type="button"
+          className="btn btn-block btn-hipster"
+          disabled={isLoading}
+          onClick={() => {
+            dispatch(
+              loginUser({ email: "testUser@test.com", password: "secret" })
+            );
+          }}
+        >
+          {isLoading ? "loading..." : "demo"}
+        </button>
       </form>
     </Wrapper>
-  )
+  );
 }
 
-export default Register
+export default Register;
